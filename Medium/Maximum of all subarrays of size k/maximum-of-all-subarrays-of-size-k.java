@@ -59,6 +59,7 @@ class Solution
         
         ArrayList<Integer> arr_f = new ArrayList<Integer>(); 
         ArrayDeque<Integer> deq = new ArrayDeque<Integer> ();
+        
         int i ; 
         for (i =0 ;i<k;i++){
              while(!deq.isEmpty() && arr[i]>= arr[deq.peekLast()]){
