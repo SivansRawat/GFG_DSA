@@ -57,39 +57,45 @@ class Solution
     {
         // Your code here
         
-        ArrayList<Integer> arr_f = new ArrayList<Integer>(); 
-        ArrayDeque<Integer> deq = new ArrayDeque<Integer> ();
+        ArrayList<Integer> arr_f = new ArrayList<Integer>(); // final arraylist to be returned 
+        // ArrayDeque<Integer> deq = new ArrayDeque<Integer> ();  // deque to store maximum values 
         
-        int i ; 
-        for (i =0 ;i<k;i++){
-             while(!deq.isEmpty() && arr[i]>= arr[deq.peekLast()]){
-                 deq.removeLast();
-                 
-                 
-             }
-              deq.addLast(i);
-        }
-        
-        for(;i<n;i++){
-            arr_f.add(arr[deq.peek()]);
-            
-            while((!deq.isEmpty()) &&  deq.peek() <= i-k){
-                deq.removeFirst();
-            }
-            
-            while((!deq.isEmpty()) && arr[i] >= arr[deq.peekLast()] ){
+        int i=0,j=0;
+        // int n = nums.length;
+        // int[] arr  = new int[n-k+1];
+
+        ArrayDeque<Integer> deq = new ArrayDeque<>();
+
+        while(j<n){
+            while(!deq.isEmpty() && arr[j] > deq.peekLast()){
                 deq.removeLast();
-                
             }
-            
-            deq.addLast(i);
-            
-            
+
+            deq.addLast(arr[j]);
+            // System.out.println(deq);
+
+
+            if(j-i+1<k){
+                j++;
+
+            }
+
+
+            else if(j-i+1 == k){
+                arr_f.add(deq.peekFirst());
+
+                if(deq.peek()==arr[i]){
+                    deq.removeFirst();
+                }
+
+                i++;
+                j++;
+            }
+
         }
-        
-        
-        arr_f.add((arr[deq.peek()]));
-        
+
+
         return arr_f;
+        
     }
 }
