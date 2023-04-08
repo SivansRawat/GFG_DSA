@@ -79,10 +79,7 @@ class Solution{
             
         }
         
-        // if(max < 0){
-        //     return -1;
-        // }
-        
+       
         return max;
         
     }
