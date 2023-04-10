@@ -44,17 +44,14 @@ class Solution{
     public static void frequencyCount(int arr[], int N, int P)
     {
         // code here
+        
+        
+        // hashmap for frequency related problems 
     
     Map<Integer , Integer> map = new HashMap<>();
     for(int i =0;i<N;i++){
-        if(map.containsKey(arr[i])){
-            map.put(arr[i],map.get(arr[i]) +1);
-            
-        }
         
-        else{
-            map.put(arr[i],1);
-        }
+        map.put(arr[i], map.getOrDefault(arr[i],0) +1);
     }
     
     for(int i =1;i<=N;i++){
