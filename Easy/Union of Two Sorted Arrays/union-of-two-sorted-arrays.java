@@ -55,11 +55,13 @@ class Solution
     public static ArrayList<Integer> findUnion(int arr1[], int arr2[], int n, int m)
     {
         // add your code here
+        
         ArrayList<Integer> arrList = new ArrayList<>();
         int i =0 ,j=0;
         
-        while(i<n && j<m){
+        while(i<n && j<m){ 
             
+            // if element in arr1[] is smaller than in arr1[]
             if(arr1[i] < arr2[j]){
                 if((arrList.size()>0) && (arrList.get(arrList.size()-1) != arr1[i])){
                     arrList.add(arr1[i]);
@@ -69,11 +71,12 @@ class Solution
                     arrList.add(arr1[i]);
                 }
                 
-                i++;
+                i++;  // increment i index 
                     
             }
                
             
+            // if element in arr2[] is smaller than in arr1[]
             
             else if(arr2[j] < arr1[i]){
                 if((arrList.size() >0) &&(arrList.get(arrList.size()-1) != arr2[j])){
@@ -84,8 +87,12 @@ class Solution
                     arrList.add(arr2[j]);
                 }
                
-                j++;
+                j++;  // increment j index 
             }
+            
+            
+            
+            // if elements in both the arrays are equal then you can pick element from any array
             
             else{
                 if((arrList.size() >0) && (arrList.get(arrList.size()-1) != arr2[j])){
@@ -96,13 +103,15 @@ class Solution
                     arrList.add(arr2[j]);
                     
                 }
-                j++;
+                j++; // increment both i and j index 
                 i++;
             }
             
         }
         
         
+        
+        // to check if any other elements sre remaining in arr1[]
         
         while(i<n){
             if(arrList.get(arrList.size()-1) != arr1[i]){
@@ -115,6 +124,8 @@ class Solution
             // i++;
         }
         
+        
+        // to check if any other elements are remaining are elements are remaing in list arr1[]
         
         while(j<m){
             if(arrList.get(arrList.size()-1) != arr2[j]){
