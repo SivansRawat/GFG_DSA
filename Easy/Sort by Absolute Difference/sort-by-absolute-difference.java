@@ -42,6 +42,7 @@ class Solution
         
         
         TreeMap<Integer,ArrayList<Integer>> m = new TreeMap<>();
+        
         for(int i = 0 ; i<n;i++){
             int diff = Math.abs(arr[i]-k);
             if(m.containsKey(diff)){
@@ -50,9 +51,10 @@ class Solution
                 m.put(diff,al);
             }
              else{
-                 ArrayList<Integer> al = new ArrayList<Integer>();
-                 al.add(arr[i]);
-                 m.put(diff,al);
+                 
+                ArrayList<Integer> al = new ArrayList<Integer>();
+                al.add(arr[i]);
+                m.put(diff,al);
                  
              }
             
