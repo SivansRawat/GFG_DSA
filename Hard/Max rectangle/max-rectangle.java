@@ -29,8 +29,6 @@ class FindMinCost
 
 /*Complete the function given below*/
 
-
-
 class Pair{
     int first;
     int second;
@@ -82,8 +80,6 @@ class Solution {
     }
     
     
-    
-    
     public int MAH(int[] heights , int n){
         
         
@@ -129,7 +125,4 @@ class Solution {
         
     }
     
-    
-    
-    
-    }
+}
