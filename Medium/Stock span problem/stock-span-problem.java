@@ -56,6 +56,10 @@ class Solution
         
         Stack<Pair> stk = new Stack<>();
         
+        
+        
+        
+        // NEXT GREATER TO LEFT   
         for(int i=0;i<n;i++){
             
             
