@@ -38,7 +38,7 @@ class Solution{
     { 
         //Your code here
         
-          Arrays.sort(arr);
+        Arrays.sort(arr);
         
         return(arr[k-1]);
     
