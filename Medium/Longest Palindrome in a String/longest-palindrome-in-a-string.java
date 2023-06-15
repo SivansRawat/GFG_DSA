@@ -28,9 +28,7 @@ class Solution{
     static String longestPalin(String S){
         // code here
         
-        
-            // code here
-    String str = S.substring(0,1);
+         String str = S.substring(0,1);
         
     if (S == null || S.length() < 1) return "";
     int max = 1;
