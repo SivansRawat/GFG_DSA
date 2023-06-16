@@ -52,7 +52,9 @@ class Solution
 	public int peakElement(int[] arr,int n)
     {
        //add code here.
-        int s =0;
+       
+       
+       int s =0;
 
        int e = n-1;
 
@@ -77,6 +79,5 @@ class Solution
        }
 
        return mid;
-
     }
 }
