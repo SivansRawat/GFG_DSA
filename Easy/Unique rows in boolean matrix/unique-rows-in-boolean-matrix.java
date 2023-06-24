@@ -1,28 +1,35 @@
 //{ Driver Code Starts
 import java.lang.Math;
+import java.io.*;
 import java.util.*;
 class UniqueRows{
-public static void main(String[] args)
- {  Scanner sc=new Scanner(System.in);
-		int t=sc.nextInt();
+public static void main(String[] args)throws IOException
+ {  
+     BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
+     PrintWriter out=new PrintWriter(System.out);
+		int t=Integer.parseInt(in.readLine().trim());
 		while(t-->0){
-			int r=sc.nextInt();
-			int c=sc.nextInt();
+		    String s[]=in.readLine().trim().split(" ");
+			int r=Integer.parseInt(s[0]);
+			int c=Integer.parseInt(s[1]);
+			s=in.readLine().trim().split(" ");
+			int ind=0;
 			int[][] a=new int [r][c];
 			for(int i=0;i<r;i++)
 				for(int j=0;j<c;j++)
-					a[i][j]=sc.nextInt();
+					a[i][j]=Integer.parseInt(s[ind++]);
 			GfG g=new GfG();
 			ArrayList<ArrayList<Integer>> arr = g.uniqueRow(a,r,c);
 			for(int i = 0;i<arr.size();i++){
 			    ArrayList<Integer> demo = arr.get(i);
 			    for(int j = 0;j<demo.size();j++){
-			        System.out.print(demo.get(j)+" ");
+			        out.print(demo.get(j)+" ");
 			    }
-			    System.out.print("$");
+			    out.print("$");
 			}
-			System.out.println();
+			out.println();
 		}
+		out.close();
  }
 }
 // } Driver Code Ends
@@ -34,22 +41,16 @@ class GfG
     public static ArrayList<ArrayList<Integer>> uniqueRow(int a[][],int r, int c)
     {
         //add code here.
-        
-        
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
-        LinkedHashSet<ArrayList<Integer>> set = new LinkedHashSet<ArrayList<Integer>>();
-        for(int i=0;i<a.length;i++){
-            ArrayList<Integer> arr = new ArrayList<Integer>();
-            for(int j=0;j<a[0].length;j++){
-                
-                arr.add(a[i][j]);
+        ArrayList<ArrayList<Integer>> list=new ArrayList<ArrayList<Integer>>();
+        for(int i=0;i<r;i++){
+            ArrayList<Integer> temp=new ArrayList<>();
+            for(int j=0;j<c;j++){
+                temp.add(a[i][j]);
             }
-            set.add(arr);
+            if(!list.contains(temp)){
+                list.add(temp);
+            }
         }
-        
-        for(ArrayList<Integer> ad : set){
-            ans.add(ad);
-        }
-        return ans;
+        return list;
     }
 }
