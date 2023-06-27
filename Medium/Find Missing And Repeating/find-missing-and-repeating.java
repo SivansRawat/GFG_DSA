@@ -50,6 +50,8 @@ class Solve {
             break;
         }
     }
+    
+    
     return new int[]{repeating, missing};
         
         
