@@ -40,7 +40,7 @@ class Solution{
     {
         //Your code here
         
-         Map<Long,Integer> map = new HashMap<>();
+        Map<Long,Integer> map = new HashMap<>();
         int i=-1;
         long sum=0;
         long count=0;
