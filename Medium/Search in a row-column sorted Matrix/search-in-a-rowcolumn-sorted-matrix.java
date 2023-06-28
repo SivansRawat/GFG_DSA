@@ -42,7 +42,9 @@ class Solution
 	{  
 	    // code here 
 	    
-	    boolean result = false;
+	    
+	    
+	     boolean result = false;
 	    
 	    int column = m-1 , row = 0;
 	    
@@ -67,6 +69,5 @@ class Solution
 	    
 	    
 	    return result;
-	    
 	} 
 } 
