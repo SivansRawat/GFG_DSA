@@ -50,17 +50,27 @@ class Compute {
         
         
         ArrayList list=new ArrayList<>();
-for(int i=0;i<n;i++){
-list.add(a1[i]);
-}
-for(int i=0;i<m;i++){
-if(list.contains(a2[i])){
-list.remove(a2[i]);
-}else{
-return "No";
-}
-}
-return "Yes";
+        for(int i=0;i<n;i++){
+            list.add(a1[i]);
+        }
+        
+        
+        for(int i=0;i<m;i++){
+            if(list.contains(a2[i])){
+                list.remove(a2[i]);
+                
+            }
+            
+            else{
+                
+                return "No";
+                
+            }
+            
+        }
+        
+        
+        return "Yes";
         
     }
 }
