@@ -38,19 +38,20 @@ class Solution
     {
         // code here
         
-          if(low <high){
+        if(low <high){
             
             int pivot = partition(arr,low,high);
             quickSort(arr,low,pivot-1);
             quickSort(arr,pivot+1,high);
-            
-        }
+    }
+    
+    
     }
     static int partition(int arr[], int low, int high)
     {
         // your code here
         
-         int pivot = arr[low];
+        int pivot = arr[low];
         int i = low;
         int j = high;
         
@@ -69,14 +70,14 @@ class Solution
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j]= temp;
-                
-                
-            }
-        }
-        
-        int temp = arr[j];
+    } 
+}
+int temp = arr[j];
         arr[j] = arr[low];
         arr[low] = temp;
         return j;
-    } 
+
+
+
+}
 }
