@@ -28,7 +28,6 @@ class GFG
 class Solution{
     static int longestSubstrDistinctChars(String S){
         // code here
-        
         int i  =0 , j=0;
         int max = Integer.MIN_VALUE;
         
@@ -81,6 +80,5 @@ class Solution{
         
        
         return max;
-        
     }
 }
