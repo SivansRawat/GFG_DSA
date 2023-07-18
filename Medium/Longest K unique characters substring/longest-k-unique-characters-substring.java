@@ -32,7 +32,8 @@ class Solution {
         
         HashMap<Character,Integer> map = new HashMap<>();
         
-        while(j<size){
+        while(j<size){ 
+            
             
             map.put(s.charAt(j) , map.getOrDefault(s.charAt(j) , 0 ) +1);
             
