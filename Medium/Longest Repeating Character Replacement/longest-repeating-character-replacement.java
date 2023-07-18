@@ -88,7 +88,8 @@ class GFG {
 class Solution {
     static int characterReplacement(String S, int K) {
         // code here
-        int n = S.length();
+        
+         int n = S.length();
 
         int i=0, j=0 ;
         
@@ -121,7 +122,5 @@ class Solution {
         }
         
         return ans;
-        
-        
     }
 }
