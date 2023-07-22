@@ -78,32 +78,26 @@ class GfG
     {
 	// Your code here	
 	
-	Node curr = head;
-	Node dup = head.next;
-	Node he = head;
 	
-	while(dup!= null){
-	    
-	    if(dup.next== null){
-	        
-	        curr.next= null;
-	        
-	    }
-	    
-	    if(curr.data == dup.data){
-	        dup= dup.next;
-	    }
-	    
-	    else{
-	        
-	        
-	        curr.next = dup;
-	        curr= curr.next;
-	        dup = dup.next;
-	    }
-	}
+	Node temp = head;
+        while (temp != null && temp.next != null)
+        {
+            if (temp.next.data==temp.data)
+            {
+                temp.next=temp.next.next;
+                
+            }
+            
+            else{
+                
+            
+            temp=temp.next;
+                
+            }
+        }
+        return head;
 	
 	
-	return head;
+	
     }
 }
