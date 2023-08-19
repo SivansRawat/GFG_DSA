@@ -42,28 +42,8 @@ class Solution
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
     {
         // Your code here
-        // // int []  res = new int[2];
-        // ArrayList<Integer> res = new ArrayList<>();
         
-        // Map<Integer,Integer> map = new HashMap<Integer,Integer>();
-
-        // for(int i = 0 ; i<arr.length;i++){
-
-        //     if(map.containsKey(s - arr[i])){
-               
-        //         res.add(map.get(s - arr[i]) +1) ;
-        //         res.add(i +1) ;
-        //         return res ;
-        //     }
-
-        //     map.put(arr[i] , i);
-        
-        // }
-
-        // return res ;
-        
-        
-               ArrayList<Integer> a = new ArrayList<Integer>();
+          ArrayList<Integer> a = new ArrayList<Integer>();
         if(s==0){
             a.add(-1);
             return a;
@@ -90,5 +70,7 @@ class Solution
         
         a.add(-1);
         return a;
+        
+        
     }
 }
