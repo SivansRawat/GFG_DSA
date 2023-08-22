@@ -106,7 +106,9 @@ class GFG
 //     Node left, right;
 // }
 
-class Solution{
+class Solution
+{
+    
      Map<Node, Node> par = new HashMap<>();
     Map<Node, Integer> vis = new HashMap<>();
     ArrayList<Integer> ans = new ArrayList<>();
