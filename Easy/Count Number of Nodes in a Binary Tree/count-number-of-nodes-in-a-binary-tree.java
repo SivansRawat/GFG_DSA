@@ -68,15 +68,36 @@ class Solution {
     public static int countNodes(Node root) {
         // Code here
         
-        int res = 0;
+        if(root == null) return 0; 
         
-        if(root == null) return 0;
+        int lh = findHeightLeft(root); 
+        int rh = findHeightRight(root); 
         
-        else{
-            
-            res = 1+ countNodes(root.left) + countNodes(root.right);
+        if(lh == rh) return (1<<lh) - 1; 
+        
+        int leftNodes = countNodes(root.left);
+        int rightNodes = countNodes(root.right);
+        
+        return 1 + leftNodes + rightNodes; 
+        
+    }
+    
+    
+    static int findHeightLeft(Node cur) {
+        int hght = 0; 
+        while(cur!=null) {
+            hght++; 
+            cur = cur.left; 
         }
-        
-        return res ;
+        return hght; 
+    }
+
+static int findHeightRight(Node cur) {
+        int hght = 0; 
+        while(cur!=null) {
+            hght++; 
+            cur = cur.right; 
+        }
+        return hght; 
     }
 }
