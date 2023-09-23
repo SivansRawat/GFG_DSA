@@ -42,6 +42,7 @@ class Solution {
 
         // Your code here
         
+            
         int rightSum = 0;
         int leftSum = 0;
         int totalSum =0;
@@ -65,7 +66,6 @@ class Solution {
         }
         
         return -1;
-        
         
     }
 }
