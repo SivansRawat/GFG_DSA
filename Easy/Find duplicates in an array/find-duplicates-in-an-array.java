@@ -26,95 +26,6 @@ class Solution {
     public static ArrayList<Integer> duplicates(int arr[], int n) {
         // code here
         
-        // ArrayList<Integer> arrList = new ArrayList<Integer>();
-        
-        
-        
-        
-        // for(int i =0;i<n;i++){
-            
-        //     arrList1.add(arr[i]);
-        // }
-        
-        // // ArrayList<Integer> arrList1 = new ArrayList<Integer>();
-        
-        // // for(int i = 0 ; i<n ;i++){
-            
-        // //     arrList.add(arr[i]);
-        // // }
-        
-        
-        
-        // // for(int i = 0 ;i<n;i++){
-        // //     arrList.remove(Integer.valueOf(i));
-            
-        // // }
-        
-        
-        
-        // // if(arrList.isEmpty()){
-        // //     arrList.add(-1);
-            
-        // // }
-        
-        
-        
-        // // HashMap<Integer,Integer> map = new HashMap<>();
-        
-        // // for(int i = 0 ; i<n ;i++){
-        // //     map.put(arr[i], map.getOrDefault(arr[i],0)+1);
-
-            
-        // //     // if(map.get(arr[i]) ==2){
-        // //     //     arrList.add(arr[i]);
-        // //     // }
-            
-        // // }
-        
-        
-        
-        // // // for(int i=0;i<n;i++){
-            
-        // // //     if(map.get(arr[i]) ==2){
-        // // //         arrList.add(arr[i]);
-        // // //     }
-        // // // }
-        
-        // // Iterator <Integer> it = map.keySet().iterator(); 
-        // // while(it.hasNext())  {  
-        // //     int key=it.next();
-        // //     if(map.get(key) >1){
-        // //         arrList.add(key);
-        // // }
-        // // }
-        
-        
-        
-        // HashSet<Integer> set = new HashSet<>();
-        
-        // for(int i=0;i<n;i++){
-            
-        //     set.add(arr[i]);
-        // }
-        
-        
-        // arrList.addAll(set);
-        
-        
-        
-        // int m = arrList.size();
-        
-        
-        // for(int i=0;i<m;i++){
-            
-        //     arrList1.remove(arrList.get(i));
-        // }
-        
-        // if (arrList1.isEmpty()) arrList1.add(-1);
-        
-        // // Collections.sort(arrList);   
-        // return arrList1;
-        
         
         ArrayList<Integer> list=new ArrayList<>();
         HashMap<Integer,Integer> map=new HashMap<>();
@@ -137,6 +48,5 @@ class Solution {
             return list;
         }
         else return list;
-        
     }
 }
