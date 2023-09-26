@@ -45,55 +45,25 @@ class GFG {
 // k : the quadruple sum required
 
 class Solution {
-    public ArrayList<ArrayList<Integer>> fourSum(int[] arr, int k) {
-        // code here
-        
-        
+    public ArrayList<ArrayList<Integer>> fourSum(int[] arr, int tar) {
         Arrays.sort(arr);
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        int n = arr.length;
-
-        for (int i = 0; i < n - 3; i++) {
-            if (i > 0 && arr[i] == arr[i - 1]) {
-                continue;
-            }
-
-            for (int j = i + 1; j < n - 2; j++) {
-                if (j > i + 1 && arr[j] == arr[j - 1]) {
-                    continue;
-                }
-
-                long tSum = (long) k - arr[i] - arr[j];
-                int l = j + 1, h = n - 1;
-
-                while (l < h) {
-                    if (arr[l] + arr[h] == tSum) {
-                        ArrayList<Integer> oneAns = new ArrayList<>();
-                        oneAns.add(arr[i]);
-                        oneAns.add(arr[j]);
-                        oneAns.add(arr[l]);
-                        oneAns.add(arr[h]);
-                        ans.add(oneAns);
-
-                        while (l < h && arr[l] == arr[l + 1]) {
-                            l++;
-                        }
-                        while (l < h && arr[h] == arr[h - 1]) {
-                            h--;
-                        }
-
-                        l++;
-                        h--;
-                    } else if (arr[l] + arr[h] < tSum) {
-                        l++;
-                    } else {
-                        h--;
-                    }
+        int n=arr.length;
+        ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        for(int i=0;i<n-3;i++){
+            for(int j=i+1;j<n-2;j++){
+                int k=j+1,l=n-1;
+                while(k<l){
+                    int sum=arr[i]+arr[j]+arr[k]+arr[l];
+                    if(sum==tar){
+                        ArrayList<Integer> temp=new ArrayList<Integer>(Arrays.asList(arr[i],arr[j],arr[k],arr[l])) ; 
+                            if(!ans.contains(temp)) ans.add(temp);
+                        k++;
+                        l--;
+                    }else if(sum>tar) l--;
+                    else k++;
                 }
             }
         }
-
-        return ans;
-        
+            return ans;
+        }
     }
-}
