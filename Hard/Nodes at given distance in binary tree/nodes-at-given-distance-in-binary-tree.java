@@ -108,41 +108,70 @@ class GFG
 
 class Solution
 {
+    public static ArrayList<Integer> KDistanceNodes(Node root, int target , int k)
+    {
+        // return the sorted list of all nodes at k dist
+        Node key = findKey(root, target);
+        HashMap<Node, Node> map = new HashMap<>();
+        parentNode(root, map, target);
+        return findKDist(map, new HashMap<>(), root, key, k);
+    }
     
-     Map<Node, Node> par = new HashMap<>();
-    Map<Node, Integer> vis = new HashMap<>();
-    ArrayList<Integer> ans = new ArrayList<>();
-    Node t;
-
-    public void parent(Node root, int target) {
-        if (root.data == target) t = root;
-        if (root.left != null) {
-            par.put(root.left, root);
-            parent(root.left, target);
-        }
-        if (root.right != null) {
-            par.put(root.right, root);
-            parent(root.right, target);
+    private static void parentNode(Node root, HashMap<Node, Node> map, int target){
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            Node curr = q.poll();
+            if(curr.left != null){
+                map.put(curr.left, curr);
+                q.offer(curr.left);
+            }
+            if(curr.right != null){
+                map.put(curr.right, curr);
+                q.offer(curr.right);
+            }
         }
     }
-
-    public void dfs(Node node, int k) {
-        if (node == null || vis.containsKey(node)) return;
-        vis.put(node, 1);
-        if (k == 0) {
-            ans.add(node.data);
-            return;
+    
+    private static ArrayList<Integer> findKDist(HashMap<Node, Node> map, HashMap<Node, Boolean> map2, Node root, Node key, int k){
+        Queue<Node> q = new LinkedList<>();
+        q.offer(key);
+        map2.put(key, true);
+        int level = 0;
+        while(!q.isEmpty()){
+            if(level == k) break;
+            level++;
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                Node curr = q.poll();
+                if(curr.left != null && map2.get(curr.left) == null){
+                    q.offer(curr.left);
+                    map2.put(curr.left, true);
+                }
+                if(curr.right != null && map2.get(curr.right) == null){
+                    q.offer(curr.right);
+                    map2.put(curr.right, true);
+                }
+                if(map.get(curr) != null && map2.get(map.get(curr)) == null){
+                    q.offer(map.get(curr));
+                    map2.put(map.get(curr), true);
+                }
+            }
         }
-        dfs(node.left, k - 1);
-        dfs(node.right, k - 1);
-        dfs(par.get(node), k - 1);
-    }
-
-    public ArrayList<Integer> KDistanceNodes(Node root, int target, int k) {
-        ans.clear();
-        parent(root, target);
-        dfs(t, k);
+        ArrayList<Integer> ans = new ArrayList<>();
+        while(!q.isEmpty()){
+            ans.add(q.poll().data);
+        }
         Collections.sort(ans);
         return ans;
+    }
+    
+    private static Node findKey(Node root, int target){
+        if(root == null) return null;
+        if(root.data == target) return root;
+        Node left = findKey(root.left, target);
+        Node right = findKey(root.right, target);
+        if(right == null) return left;
+        return right;
     }
 };
