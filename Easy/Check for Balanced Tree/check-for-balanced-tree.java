@@ -160,4 +160,3 @@ class Tree
         return Math.max(leftHeight,rightHeight)+1;
     }
 }
-
