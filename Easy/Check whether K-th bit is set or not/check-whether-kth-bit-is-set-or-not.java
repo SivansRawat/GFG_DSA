@@ -16,12 +16,8 @@ class CheckBit
     {
         // Your code here
         
-        
-        BitSet b = BitSet.valueOf(new long[]{n});
+           BitSet b = BitSet.valueOf(new long[]{n});
         return b.get(k);
-        
-        
-        
     }
     
 }
