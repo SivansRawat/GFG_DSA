@@ -111,35 +111,39 @@ class GfG {
 
 //User function Template for Java
 
-class Solution
+ class Solution
 {
     
     static Node prev = null;
-     
+    
+    
     public static void flatten(Node root)
     {
         //code here
-        
-    if (root == null) return;
-  Stack < Node  > st=new Stack<>();
-  st.push(root);
-  while (!st.isEmpty()) {
-    Node  cur = st.peek();
-    st.pop();
-
-    if (cur . right != null) {
-      st.push(cur . right);
-    }
-    if (cur . left != null) {
-      st.push(cur . left);
-    }
-    if (!st.isEmpty()) {
-      cur . right = st.peek();
-    }
-    cur . left = null;
+        Node cur = root;
         
         
-    }
+        while(cur != null ){
+            
+            
+            if(cur.left!= null){
+                
+                prev = cur.left;
+                
+                while(prev.right != null){
+                    
+                    prev= prev.right;
+                }
+                
+                prev.right = cur.right;
+                cur.right = cur.left;
+                cur.left =null;
+                
+            }
+            
+            cur = cur.right;
+        }
+        
+        
     }
 }
-
