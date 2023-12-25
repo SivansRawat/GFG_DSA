@@ -109,38 +109,89 @@ class GfG {
 // User function Template for Java
 
 class Tree {
-    private static int minimum(Node root){
-        if(root==null) return Integer.MAX_VALUE;
-        int left=minimum(root.left);
-        int right=minimum(root.right);
-        return Math.min(root.data,Math.min(left,right));
-    }
     // Function to delete a node from BST.
-    public static Node deleteNode(Node root, int x) {
-        if(root==null) return null;
-        if(root.data<x){
-            root.right=deleteNode(root.right,x);
-            return root;
+    
+    
+    public static Node deleteNode(Node root, int X) {
+        // code here.
+        
+        
+        if(root == null){
+            return null;
         }
-        if(root.data>x){
-            root.left=deleteNode(root.left,x);
-            return root;   
+        
+        
+        if(root.data == X){
+            return helper(root);
         }
-        //if (root.data==x)
-        //0 children
-        if(root.left==null && root.right==null) return null;
-        // 1 children
-        if(root.left==null && root.right!=null){
-            return root.right;
+        
+
+        Node dummy = root;
+
+        while(root != null){
+            
+        if(root.data > X){
+
+            if(root.left != null && root.left.data == X){
+                root.left = helper(root.left);
+                break;
+            }
+
+            else{
+                root= root.left;
+            }
         }
-        if(root.left!=null && root.right==null){
-            return root.left;
+
+        else{
+
+            if(root.right != null && root.right.data == X){
+                root.right = helper(root.right);
+                break;
+            }
+
+            else{
+                root = root.right;
+            }
         }
-        //2 children exists
-        int rightmin=minimum(root.right);
-        root.data=rightmin;
-        root.right=deleteNode(root.right,rightmin);
-        return root;
+    }
+
+        return dummy;
     }
     
+    
+    static Node helper(Node root){
+
+
+        // if(root.left == null && root.right == null) return null;
+
+        if(root.left == null){
+            return root.right;
+        }
+
+
+        else if(root.right == null){
+            return root.left;
+        }
+
+
+        Node Tright = root.right;
+        Node lastRight = lRight(root.left);
+
+        lastRight.right = Tright;
+
+        return root.left;
+
+
+    }
+
+
+
+    static Node lRight(Node root){
+
+        if(root.right == null){
+            return root;
+        }
+
+        return lRight(root.right);
+    }
 }
