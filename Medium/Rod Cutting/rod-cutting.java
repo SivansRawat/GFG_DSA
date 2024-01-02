@@ -25,39 +25,33 @@ class RodCutting {
 // } Driver Code Ends
 
 
-
 class Solution{
-    
-    
-    int fun(int pos, int[] price, int[] vis){
-        if(vis[pos]!=-1)return vis[pos];
-        int max=price[pos-1];
-        int i=1;
-        while(i<=pos/2){
-            vis[i]=fun(i, price, vis);
-            vis[pos-i]=fun(pos-i, price, vis);
-            max=Math.max(max, vis[i]+vis[pos-i]);
-            i++;
-        }
-        return max;
-    }
-    
-    
     public int cutRod(int price[], int n) {
         //code here
-        int max=0;
-        int vis[]=new int[n+1];
-        for(int i=2; i<n; i++){
-            vis[i]=-1;
+        
+         int[][] dp = new int[price.length + 1][n + 1];
+
+        for (int i = 0; i < price.length + 1; i++) {
+            for (int j = 0; j < n + 1; j++) {
+                if (i == 0 || j == 0) {
+                    dp[i][j] = 0;
+                }
+            }
         }
-        vis[0]=0;
-        vis[1]=price[0];
-        vis[n]=price[n-1];
-        for(int i=0; i<n; i++){
-            vis[i]=fun(i, price, vis);
-            vis[n-i]=fun(n-i, price, vis);
-            max=Math.max(max, vis[i]+vis[n-i]);
+        
+        
+        for (int i = 1; i < price.length + 1; i++) {
+            for (int j = 1; j < n + 1; j++) {
+                if (i  <= j) {
+                    dp[i][j] = Math.max(price[i - 1] + dp[i][j - i ], dp[i - 1][j]);
+                } else {
+                  
+                    dp[i][j] = dp[i - 1][j];
+                }
+            }
         }
-        return max;
+
+
+          return dp[price.length][n];
     }
 }
