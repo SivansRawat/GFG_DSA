@@ -40,20 +40,19 @@ class GFG {
 class Solution
 {
     //Function to find length of shortest common supersequence of two strings.
-    
-    
-
 
 public static int shortestCommonSupersequence(String X,String Y,int m,int n)
 {
         //Your code here
         int[][] dp = new int[m][n];
+        
         for(int[] row : dp) {
             Arrays.fill(row, -1);
         }
         
         return m + n - LCS(X, Y, m - 1, n - 1, dp);
 }
+
     
 public static int LCS(String s1, String s2, int i, int j, int[][] dp)
 {
