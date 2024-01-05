@@ -28,26 +28,58 @@ class Solution
 {
     public int longestPalinSubseq(String S)
     {
+        //code here
         
+        String reversedStr = "";
         
-         int n = S.length();
-        int[][] dp = new int[n][n];
-        
-        for (int i = 0; i < n; i++) {
-            dp[i][i] = 1;
+        for (int i = 0; i < S.length(); i++) {
+             reversedStr =S.charAt(i) + reversedStr;
         }
+    
+        int ans = lcs(S.length() , S.length() , S , reversedStr);
+    
+    
+        return ans;
+    
+    }
+    
+    
+    static int lcs(int x, int y, String s1, String s2)
+    {
+        // your code here
         
-        for (int length = 2; length <= n; length++) {
-            for (int i = 0; i < n - length + 1; i++) {
-                int j = i + length - 1;
-                if (S.charAt(i) == S.charAt(j)) {
-                    dp[i][j] = 2 + dp[i + 1][j - 1];
-                } else {
-                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
-                }
+        int[][] dp = new int[x+1][y+1];
+        
+        for(int i=0 ;i<x+1;i++){
+            for(int j=0;j<y+1;j++){
+                if(i==0 || j==0) dp[i][j] =  dp[i][j] = 0;
             }
         }
         
-        return dp[0][n - 1];
+    
+        for(int i=1;i<x+1;i++){
+            for(int j=1;j<y+1;j++) {
+        
+
+        
+        if(s1.charAt(i-1) == s2.charAt(j-1)){
+            
+           
+            dp[i][j] =  1+dp[i-1][j-1];
+        }
+        
+      
+        else{
+            
+            dp[i][j] = Math.max(dp[i-1][j] , dp[i][j-1]);
+        }
+        
+        
+            }
+        }
+        
+        
+        return dp[x][y];
+        
     }
 }
