@@ -27,31 +27,58 @@ class GFG
 
 class Solution
 {
-    public int LongestRepeatingSubsequence(String str)
+    public int LongestRepeatingSubsequence(String s1)
     {
         // code here
         
+        int x = s1.length();
+        int y  = s1.length();
+    
+        int ans = lcs(x,y,s1,s1);
         
-        int n = str.length();
-  
+        return ans ;
+      
         
-        int[][] dp = new int[n+1][n+1];
-  
         
-        for (int i=1; i<=n; i++)
-        {
-            for (int j=1; j<=n; j++)
-            {
-                
-                if (str.charAt(i-1) == str.charAt(j-1) && i!=j)
-                    dp[i][j] =  1 + dp[i-1][j-1];         
-                       
-              
-                else
-                    dp[i][j] = Math.max(dp[i][j-1], dp[i-1][j]);
+    }
+    
+    
+     static int lcs(int x, int y, String s1, String s2)
+    {
+        // your code here
+        
+        int[][] dp = new int[x+1][y+1];
+        
+        for(int i=0 ;i<x+1;i++){
+            for(int j=0;j<y+1;j++){
+                if(i==0 || j==0) dp[i][j] =  dp[i][j] = 0;
             }
         }
-        return dp[n][n];
+        
+    
+        for(int i=1;i<x+1;i++){
+            for(int j=1;j<y+1;j++) {
+        
+        
+        
+        if( (i!=j) && s1.charAt(i-1) == s2.charAt(j-1)){
+            
+           
+            dp[i][j] =  1+dp[i-1][j-1];
+        }
+        
+      
+        else{
+            
+            dp[i][j] = Math.max(dp[i-1][j] , dp[i][j-1]);
+        }
+        
+        
+            }
+        }
+        
+        
+        return dp[x][y];
         
     }
 }
