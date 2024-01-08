@@ -20,34 +20,49 @@ class GFG{
 
 
 //User function Template for Java
-class Solution{
-    static int palindromicPartition(String s)
-    {
-        // code here
-        int n = s.length();
-        int dp[][] = new int [n][n];
-        
-        for(int gap=1;gap<n;gap++){
-            for(int row=0,col=gap;row<n-gap; row++,col++){
-                if(isPalindrome(s,row,col)){
-                    dp[row][col]=0;
-                }
-                else{
-                    dp[row][col]=Integer.MAX_VALUE;
-                    for(int k=row;k<col;k++){
-                        dp[row][col]=Math.min(dp[row][col],
-                        1+dp[row][k]+dp[k+1][col]);
-                    }
-                }
-            }
-        }
-        return dp[0][n-1];
-    }
+
     
-    static boolean isPalindrome(String s,int i, int j){
-        while(i<j){
-            if(s.charAt(i++)!=s.charAt(j--)) return false;
+class Solution {
+    
+    int[][] dp;
+
+    public boolean isPalindrome(String s, int i, int j) {
+        while (i < j) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+            i++;
+            j--;
         }
         return true;
+    }
+
+    public int palindromicPartition(String s) {
+        int n = s.length();
+        dp = new int[n][n];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+
+        return palindromicPartitionHelper(s, 0, n - 1);
+    }
+
+    private int palindromicPartitionHelper(String s, int i, int j) {
+        if (i >= j || isPalindrome(s, i, j)) {
+            return 0;
+        }
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+
+        int minCuts = Integer.MAX_VALUE;
+
+        for (int k = i; k < j; k++) {
+            if (isPalindrome(s, i, k)) {
+                minCuts = Math.min(minCuts, 1 + palindromicPartitionHelper(s, k + 1, j));
+            }
+        }
+
+        return dp[i][j] = minCuts;
     }
 }
