@@ -33,64 +33,90 @@ class GFG
 }
 // } Driver Code Ends
 
+class Node {
+    int first;
+    int second;
+    int third;
+
+    Node(int _first, int _second, int _third) {
+        this.first = _first;
+        this.second = _second;
+        this.third = _third;
+    }
+}
+
+
+class Pair{
+    
+    int row;
+    int col;
+    int tm;
+    
+    Pair(int _row,int _col , int _tm){
+        this.row = _row;
+        this.col = _col;
+        this.tm = _tm;
+        
+    }
+}
 
 class Solution
 {
     //Function to find distance of nearest 1 in the grid for each cell.
-    
-    static class Pair{
-        int row;
-        int col;
-        Pair(int row,int col)
-        {
-            this.row=row;
-            this.col=col;
-        }
-    }
-    
-    static void bfs(int grid[][],int ans[][])
-    {
-        Queue<Pair> q=new LinkedList();
-        for(int i=0;i<grid.length;i++)
-        {
-            for(int j=0;j<grid[0].length;j++)
-            {
-                if(grid[i][j]==1)
-                {
-                    q.add(new Pair(i,j));
-                }
-            }
-        }
-        
-        
-        while(!q.isEmpty())
-        {
-            int r=q.peek().row;
-            int c=q.peek().col;
-            
-            q.poll();
-            int dr[]={-1,1,0,0};
-            int dc[]={0,0,1,-1};
-            for(int i=0;i<4;i++)
-            {
-                int nr=r+dr[i];
-                int nc=c+dc[i];
-                
-                if(nr>=0 && nc>=0 && nr<grid.length && nc<grid[0].length && grid[nr][nc]==0 && ans[nr][nc]==0)
-                {
-                    ans[nr][nc]=ans[r][c]+1;
-                    q.add(new Pair(nr,nc));
-                }
-            }
-        }
-    }
-    
-    
     public int[][] nearest(int[][] grid)
     {
         // Code here
-        int ans[][]=new int[grid.length][grid[0].length];
-        bfs(grid,ans);
-        return ans;
+        
+        int n = grid.length; 
+	    int m = grid[0].length; 
+	    // visited and distance matrix
+	    int vis[][] = new int[n][m]; 
+	    int dist[][] = new int[n][m]; 
+	    // <coordinates, steps>
+	    Queue<Node> q = new LinkedList<Node>();
+	    // traverse the matrix
+	    for(int i = 0;i<n;i++) {
+	        for(int j = 0;j<m;j++) {
+	        // start BFS if cell contains 1
+	            if(grid[i][j] == 1) {
+	                q.add(new Node(i, j, 0)); 
+	                vis[i][j] = 1; 
+	            }
+	            else {
+	                // mark unvisted 
+	                vis[i][j] = 0; 
+	            }
+	        }
+	    }
+	    
+	    
+	    
+	    int delrow[] = {-1, 0, +1, 0}; 
+	    int delcol[] = {0, +1, 0, -1}; 
+	    
+	    
+	    // n x m x 4 
+	    // traverse till queue becomes empty
+	    while(!q.isEmpty()) {
+	        int row = q.peek().first; 
+	        int col = q.peek().second; 
+	        int steps = q.peek().third; 
+	        q.remove(); 
+	        dist[row][col] = steps; 
+	        // for all 4 neighbours
+	        for(int i = 0;i<4;i++) {
+	            int nrow = row + delrow[i]; 
+	            int ncol = col + delcol[i]; 
+	            // check for valid unvisited cell
+	            if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m
+	            && vis[nrow][ncol] == 0)  {
+	                    vis[nrow][ncol] = 1; 
+    	            q.add(new Node(nrow, ncol, steps+1));  
+	            } 
+	            }
+	        }
+	    
+	    // return distance matrix
+	    return dist; 
     }
 }
