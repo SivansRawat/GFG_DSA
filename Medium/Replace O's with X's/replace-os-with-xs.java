@@ -40,60 +40,69 @@ class GFG{
 //User function Template for Java
 
 class Solution{
-    static char[][] fill(int n, int m, char a[][])
+    
+     static void dfs(int row, int col,int vis[][], 
+    char mat[][], int delrow[], int delcol[]) {
+        vis[row][col] = 1; 
+        int n = mat.length;
+        int m = mat[0].length;
+        
+        // check for top, right, bottom, left 
+        for(int i = 0;i<4;i++) {
+            int nrow = row + delrow[i];
+            int ncol = col + delcol[i]; 
+            // check for valid coordinates and unvisited Os
+            if(nrow >=0 && nrow <n && ncol >= 0 && ncol < m 
+            && vis[nrow][ncol] == 0 && mat[nrow][ncol] == 'O') {
+                dfs(nrow, ncol, vis, mat, delrow, delcol); 
+            }
+        }
+    }
+    
+    
+    static char[][] fill(int n, int m, char mat[][])
     {
         // code here
-        
-        
-        int r = a.length;
-        int c = a[0].length;
-
-        // 1a) Capture unsurrounded regions - top and bottom row (replace O with P)
-        for(int i=0;i<c;i++){
-            if(a[0][i]=='O'){
-                dfs(0, i, a);
+        int delrow[] = {-1, 0, +1, 0};
+        int delcol[] = {0, 1, 0, -1}; 
+        int vis[][] = new int[n][m]; 
+        // traverse first row and last row 
+        for(int j = 0 ; j<m;j++) {
+            // check for unvisited Os in the boundary rws
+            // first row 
+            if(vis[0][j] == 0 && mat[0][j] == 'O') {
+                dfs(0, j, vis, mat, delrow, delcol); 
             }
-            if(a[r-1][i]=='O'){
-                dfs(r-1, i, a);
-            }
-        }
-        // 1b) Capture unsurrounded regions - Left and right columns (replace O with P)
-        for(int j=0;j<r;j++){
-            if(a[j][0]=='O'){
-                dfs(j, 0, a);
-            }
-            if(a[j][c-1]=='O'){
-                dfs(j, c-1, a);
-            }
-        }
-
-        //main loop
-        for(int i=0;i<r;i++){
-            for(int j=0;j<c;j++){
-                if(a[i][j]=='O'){
-                    a[i][j]='X'; //making the soraunded regions 'O' --> 'X'
-                }
-                if(a[i][j]=='P'){
-                    a[i][j]='O'; //making the soraunded regions 'P' --> 'O'
-                }
+            
+            // last row 
+            if(vis[n-1][j] == 0 && mat[n-1][j] == 'O') {
+                dfs(n-1,j,vis,mat, delrow, delcol); 
             }
         }
         
-        
-        return a;
-    }
-    //dfs method
-    public static void dfs(int i, int j, char[][] a){
-        //base case 
-        if(i<0 || j<0 || i>=a.length || j>=a[0].length || a[i][j]!='O'){
-            return;
+        for(int i = 0;i<n;i++) {
+            // check for unvisited Os in the boundary columns
+            // first column 
+            if(vis[i][0] == 0 && mat[i][0] == 'O') {
+                dfs(i, 0, vis, mat, delrow, delcol); 
+            }
+            
+            // last column
+            if(vis[i][m-1] == 0 && mat[i][m-1] == 'O') {
+                dfs(i, m-1, vis, mat, delrow, delcol); 
+            }
         }
-        //make the 'O' position as 'P'
-        a[i][j] = 'P';
-        //call dfs for all direction
-        dfs(i+1, j, a);
-        dfs(i-1, j, a);
-        dfs(i, j+1, a);
-        dfs(i, j-1, a);
+        
+        // if unvisited O then convert to X
+        for(int i = 0;i<n;i++) {
+            for(int j= 0 ;j<m;j++) {
+                if(vis[i][j] == 0 && mat[i][j] == 'O') 
+                    mat[i][j] = 'X'; 
+            }
+        }
+        
+        return mat;
+        
+        
     }
 }
