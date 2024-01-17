@@ -42,29 +42,38 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-     //Function to find eventual safe nodes.
     List<Integer> eventualSafeNodes(int V, List<List<Integer>> adj) {
-     //Your code here
-        List<Integer> res=new ArrayList<>();
-        boolean[] visit=new boolean[V];
-        for(int i=0;i<V;i++){
-            if(!isCycle(i,adj,visit)){
-                res.add(i);
+        List<List<Integer>> adjRev = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            adjRev.add(new ArrayList<>());
+        }
+        int indegree[] = new int[V];
+        for (int i = 0; i < V; i++) {
+            // i -> it
+            // it -> i
+            for (int it : adj.get(i)) {
+                adjRev.get(it).add(i);
+                indegree[i]++;
             }
         }
-        return res;
-    }
-    private static boolean isCycle(int source,List<List<Integer>> adj,boolean[] visit){
-       
-        visit[source]=true;
-        
-        for(Integer it:adj.get(source)){
-            if(!visit[it]){
-                if(isCycle(it,adj,visit)) return true;
-            }else return true;
-    
+        Queue<Integer> q = new LinkedList<>();
+        List<Integer> safeNodes = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
         }
-        visit[source]=false;
-        return false;
+
+        while (!q.isEmpty()) {
+            int node = q.peek();
+            q.remove();
+            safeNodes.add(node);
+            for (int it : adjRev.get(node)) {
+                indegree[it]--;
+                if (indegree[it] == 0) q.add(it);
+            }
+        }
+        Collections.sort(safeNodes);
+        return safeNodes;
     }
 }
