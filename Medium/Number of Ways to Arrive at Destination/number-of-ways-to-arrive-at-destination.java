@@ -33,73 +33,65 @@ class GFG {
 }
 // } Driver Code Ends
 
+class Pair {
+    long first;
+    int second;
 
-// User function Template for Java
-class Solution {
-    static class Graph {
-		class Node {
-			private int vertex;
-			private long cost;
-
-			public Node(int v, long cost) {
-				this.vertex = v;
-				this.cost = cost;
-			}
-		}
-
-		private int V;
-		private List<ArrayList<Node>> adj;
-
-		private int mod = (int) (1e9 + 7);
-
-		public Graph(int v) {
-			this.V = v;
-			this.adj = new ArrayList<ArrayList<Node>>(this.V);
-			for (int i = 0; i < this.V; i++) {
-				this.adj.add(new ArrayList<Node>());
-			}
-		}
-
-		public void addEdge(int u, int v, int weight) {
-			this.adj.get(u).add(new Node(v, weight));
-			this.adj.get(v).add(new Node(u, weight));
-		}
-
-		public int dijkstra(int src, int dst, int n) {
-			PriorityQueue<Node> pq = new PriorityQueue<Node>((o1, o2) -> Long.compare(o1.cost, o2.cost));
-			long[] distance = new long[n];
-			int[] ways = new int[n];
-			Arrays.fill(distance, Integer.MAX_VALUE);
-			Arrays.fill(ways, 0);
-			distance[0] = 0;
-			ways[0] = 1;
-			pq.add(new Node(src, 0));
-			while (pq.size() != 0) {
-				Node node = pq.poll();
-				int u = node.vertex;
-				long dis = node.cost;
-				for (Node neighbour : adj.get(u)) {
-					int v = neighbour.vertex;
-					long edW = neighbour.cost;
-					if (dis + edW < distance[v]) {
-						distance[v] = dis + edW;
-						pq.add(new Node(v, dis + edW));
-						ways[v] = ways[u];
-					} else if (dis + edW == distance[v]) {
-						ways[v] = (ways[v] + ways[u]) % mod;
-					}
-				}
-			}
-			return (int) (ways[n - 1] % mod);
-		}
-	}
-
-	static int countPaths(int n, List<List<Integer>> roads) {
-		Graph graph = new Graph(n);
-		int m = roads.size();
-		for (int i = 0; i < m; i++) {
-			graph.addEdge(roads.get(i).get(0), roads.get(i).get(1), roads.get(i).get(2));
-		}
-		return graph.dijkstra(0, n - 1, n);
-	}
+    public Pair(long first, int second) {
+        this.first = first;
+        this.second = second;
+    }
 }
+
+class Solution {
+
+    static int countPaths(int n, List<List<Integer>> roads) {
+        List<List<Pair>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (List<Integer> road : roads) {
+            int u = road.get(0);
+            int v = road.get(1);
+            int w = road.get(2);
+            adj.get(u).add(new Pair(w, v));  // Reversed the order of Pair elements
+            adj.get(v).add(new Pair(w, u));  // Reversed the order of Pair elements
+        }
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>(Comparator.comparingLong(x -> x.first));
+
+        long[] dist = new long[n];
+        long[] ways = new long[n];
+        Arrays.fill(dist, Long.MAX_VALUE);
+        ways[0] = 1;
+        dist[0] = 0;
+        pq.add(new Pair(0, 0));
+
+        int mod = (int) (1e9 + 7);
+
+        while (!pq.isEmpty()) {
+            Pair current = pq.poll();
+            long dis = current.first;
+            int node = current.second;
+
+            for (Pair neighbor : adj.get(node)) {
+                long edW = neighbor.first;
+                int adjNode = neighbor.second;
+
+                long newDist = dis + edW;
+
+                if (newDist < dist[adjNode]) {
+                    dist[adjNode] = newDist;
+                    ways[adjNode] = ways[node];
+                    pq.add(new Pair(newDist, adjNode));
+                } else if (newDist == dist[adjNode]) {
+                    ways[adjNode] = (ways[adjNode] + ways[node]) % mod;
+                }
+            }
+        }
+
+        return (int) (ways[n - 1] % mod);
+    }
+}
+
