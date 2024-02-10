@@ -31,16 +31,94 @@ class GFG {
 // } Driver Code Ends
 
 
-//User function Template for Java
+// //User function Template for Java
+
+// class Solution{
+    
+    
+//     static void MinHeapify(int[] arr , int i,int n ){
+        
+//         int l = 2*i+1;
+//         int r = 2*i+2;
+    
+//         int smallest = i;
+    
+//         if(l<n && arr[l] < arr[i]){
+//             smallest = l;
+//         }
+        
+//         if(r<n && arr[r] < arr[smallest]){
+//             smallest = r;
+//         }
+        
+        
+//         if(smallest != i){
+            
+//             int temp = arr[i];
+//             arr[i] = arr[smallest];
+//             arr[smallest] = temp;
+            
+//             MinHeapify(arr, smallest, n);
+//         }
+//     }
+    
+    
+    
+    
+//     public static int kthSmallest(int[] arr, int l, int r, int k) 
+//     { 
+//         //Your code here
+        
+//         int n = arr.length;
+//         for(int i=(n-2)/2 ; i>=0 ; --i){
+//             MinHeapify(arr, i, n);
+//         }
+        
+        
+//         PriorityQueue<Integer>pq= new PriorityQueue<>();
+        
+
+//         for (int i = 0; i < n; i++) {
+//             pq.add(arr[i])  ;
+//         }
+
+//         int f = k - 1 ;
+
+//         while (f > 0) {
+//             pq.remove()  ;
+//             f-- ;
+//         }
+        
+        
+//         return pq.peek();
+        
+        
+//     } 
+// }
+
+
 
 class Solution{
-    public static int kthSmallest(int[] arr, int l, int r, int k) 
-    { 
-        //Your code here
-        
-        Arrays.sort(arr);
-        
-        return(arr[k-1]);
+public static int kthSmallest(int[] arr, int l, int r, int k) {
     
-    } 
+    
+     PriorityQueue<Integer>pq= new PriorityQueue<>();
+        int n = arr.length  ;
+
+        for (int i = 0; i < n; i++) {
+            pq.add(arr[i])  ;
+        }
+
+        int f = k - 1 ;
+
+        while (f > 0) {
+            pq.remove()  ;
+            f-- ;
+        }
+         
+         
+         return pq.peek();
+        
+    
+}
 }
