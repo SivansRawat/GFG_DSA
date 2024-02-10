@@ -1,4 +1,4 @@
-<h2><a href="https://practice.geeksforgeeks.org/problems/overlapping-intervals--170633/1?page=2&sprint=a663236c31453b969852f9ea22507634&sortBy=submissions">Overlapping Intervals</a></h2><h3>Difficulty Level : Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a collection of Intervals, the task is to merge all of the overlapping Intervals.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/overlapping-intervals--170633/1">Overlapping Intervals</a></h2><h3>Difficulty Level : Medium</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given a collection of Intervals, the task is to merge all of the overlapping Intervals.</span></p>
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
 
