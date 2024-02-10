@@ -37,18 +37,26 @@ class Main
 
 //User function Template for Java
 
-class Solution
-{
-    //Function to return k largest elements from an array.
-    public static ArrayList<Integer> kLargest(int arr[], int n, int k)
-    {
-        // code here
-        
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        Arrays.sort(arr);
-        for(int i=n-1;i>=n-k;i--) {
-            list.add(arr[i]);
+class Solution {
+    // Function to return k largest elements from an array.
+    public static ArrayList<Integer> kLargest(int arr[], int n, int k) {
+        ArrayList<Integer> res = new ArrayList<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for (int i = 0; i < n; i++) {
+            pq.add(arr[i]);
+            if (pq.size() > k) // If size of priority queue exceeds k, remove the smallest element
+                pq.poll();
         }
-         return list;
+
+        // Pop k largest elements from priority queue and store in result list
+        while (!pq.isEmpty()) {
+            res.add(pq.poll());
+        }
+        
+        // Reverse the order of elements in the result list
+        Collections.reverse(res);
+
+        return res;
     }
 }
