@@ -29,33 +29,23 @@ public class Main {
 
 // } Driver Code Ends
 
-
 class Solution {
-    int[] kLargest(int[] arr, int n, int k) {
-    
-    
-    PriorityQueue<Integer> mini = new PriorityQueue<>(k);
-        
+    // Function to return k largest elements from an array.
+    public static int[] kLargest(int arr[], int n, int k) {
+        int[] res = new int[k];
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
         for (int i = 0; i < n; i++) {
-            if (mini.size() < k)
-                mini.offer(arr[i]);
-            else {
-                if (arr[i] > mini.peek()) {
-                    mini.poll();
-                    mini.offer(arr[i]);
-                }
-            }
+            pq.add(arr[i]);
+            if (pq.size() > k) // If size of priority queue exceeds k, remove the smallest element
+                pq.poll();
         }
-        
-        
-        
-        int[] ans = new int[k];
+
+        // Pop k largest elements from priority queue and store in result array
         for (int i = k - 1; i >= 0; i--) {
-            
-            
-            ans[i] = mini.poll();        }
-        
-        return ans;
-    
+            res[i] = pq.poll();
+        }
+
+        return res;
     }
 }
