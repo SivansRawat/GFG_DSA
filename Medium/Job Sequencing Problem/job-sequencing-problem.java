@@ -47,43 +47,40 @@ class Solution
     //Function to find the maximum profit and the number of jobs done.
     int[] JobScheduling(Job arr[], int n)
     {
-       
-        TreeSet <Integer> ts = new TreeSet<>();
-        int profit = 0, count = 0;
-        int [] rtn = new int [2];
-         Arrays.sort(arr, new Sort());
         
-        for(int i = 1;i <= n;i++ ){
-            ts.add(i);
-        }
-        
-        for(int i = 0;i<n;i++){
-            int element = arr[i].deadline;
-            if(ts.floor(element) != null){
-                int num = ts.floor(element);
-                ts.remove(num);
-                profit+=arr[i].profit;
-                count++;
-            }
-            
-        }
-        rtn[0] = count;
-        rtn[1] = profit;
-        
-        return rtn;
-        
-    }
-}
+        Arrays.sort(arr, (a, b) -> (b.profit - a.profit));
 
-// Sort
-class Sort implements Comparator <Job>{
-    public int compare(Job j1, Job j2){
-        int val1 = j2.profit - j1.profit;
-        int val2 = j1.deadline - j2.deadline;
-        if(val1 == 0){
-            return val2;
-        }
-        else return val1;
+      int maxi = 0;
+      for (int i = 0; i < n; i++) {
+         if (arr[i].deadline > maxi) {
+            maxi = arr[i].deadline;
+         }
+      }
+
+      int result[] = new int[maxi + 1];
+
+      for (int i = 1; i <= maxi; i++) {
+         result[i] = -1;
+      }
+
+      int countJobs = 0, jobProfit = 0;
+
+      for (int i = 0; i < n; i++) {
+         for (int j = arr[i].deadline; j > 0; j--) {
+            // Free slot found 
+            if (result[j] == -1) {
+               result[j] = i;
+               countJobs++;
+               jobProfit += arr[i].profit;
+               break;
+            }
+         }
+      }
+
+      int ans[] = new int[2];
+      ans[0] = countJobs;
+      ans[1] = jobProfit;
+      return ans;
     }
 }
 
