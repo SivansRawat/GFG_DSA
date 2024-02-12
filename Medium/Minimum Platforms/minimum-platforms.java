@@ -47,42 +47,30 @@ class Solution
     //railway station such that no train waits.
     static int findPlatform(int arr[], int dep[], int n)
     {
-        // add your code here
-        Pair[] pp = new Pair[n];
-        int res=1;
         
-        for(int i=0;i<n;i++)
-            pp[i] = new Pair(arr[i],dep[i]);
+        Arrays.sort(arr); 
+        Arrays.sort(dep); 
+  
+        int plat_needed = 1, result = 1; 
+        int i = 1, j = 0; 
+  
+        while (i < n && j < n) { 
         
-        Arrays.sort(pp,(a,b)->a.a-b.a);
-        ArrayList<Pair> list = new ArrayList<>();
-        
-        for(int i=0;i<n;i++){
-            helper(list,pp[i]);
-            res = list.size();
-        }
-        
-        return res;
-    }
-    
-    static void helper(ArrayList<Pair> list,Pair p){
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).d < p.a){
-                list.set(i,p);
-                return;
-            }
-        }
-        list.add(p);
-    }
-    
-}
-
-class Pair{
-    int a;
-    int d;
-    Pair(int x,int y){
-        a = x;
-        d = y;
+            if (arr[i] <= dep[j]) { 
+                plat_needed++; 
+                i++; 
+            } 
+  
+            else if (arr[i] > dep[j]) { 
+                plat_needed--; 
+                j++; 
+            } 
+  
+            if (plat_needed > result) 
+                result = plat_needed; 
+        } 
+  
+        return result; 
     }
     
 }
