@@ -29,6 +29,9 @@ class GFG {
 
 // User function Template for Java
 
+
+// User function Template for Java
+
 class Solution {
     public static int totalFruits(int N, int[] fruits) {
         
