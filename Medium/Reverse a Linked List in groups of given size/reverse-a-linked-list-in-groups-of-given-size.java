@@ -80,49 +80,7 @@ class Node
 
 class Solution
 {
-    // public static Node reverse(Node head, int k)
-    // {
-    //     //Your code here
-        
-        
-        
-    //     if (head == null || k <= 1) return head;
 
-    //     Node current = head;
-    //     Node next = null;
-    //     Node prev = null;
-    //     int count = 0;
-
-    //     // Count the number of nodes in the current chunk
-    //     while (current != null && count < k) {
-    //         current = current.next;
-    //         count++;
-    //     }
-
-    //     // If the current chunk has at least k nodes, reverse it
-    //     if (count == k ) {
-    //         current = head;
-    //         for (int i = 0; i < k; i++) {
-    //             next = current.next;
-    //             current.next = prev;
-    //             prev = current;
-    //             current = next;
-    //         }
-
-    //         // Recursively reverse the remaining linked list
-    //         if (next != null) {
-    //             head.next = reverse(next, k);
-    //         }
-
-    //         // 'prev' is the new head of the reversed chunk
-    //         return prev;
-    //     } else {
-    //         // If the current chunk has fewer than k nodes, return head as is
-    //         return head;
-    //     }
-    // }
-    
-    
     
     public static Node reverse(Node head, int k){
         
