@@ -67,8 +67,7 @@ class Solution{
     public Node rotate(Node head, int k) {
         // add code here
         
-                // add code here
-      if(k==0 || head==null){
+         if(k==0 || head==null){
           return head;
       }
       Node tail=head;
@@ -87,5 +86,6 @@ class Solution{
       temp.next=null;
         
        return head;
+        
     }
 }
