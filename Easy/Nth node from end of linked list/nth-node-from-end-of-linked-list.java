@@ -85,6 +85,8 @@ public class LinkedList_Element_From_Last
 // } Driver Code Ends
 
 
+
+
 /* Structure of node
 
 class Node
@@ -128,3 +130,5 @@ class Solution
     	return slow.data;
     }
 }
+
+
