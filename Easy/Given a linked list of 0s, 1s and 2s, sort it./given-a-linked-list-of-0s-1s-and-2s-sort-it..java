@@ -64,6 +64,8 @@ class Driverclass
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 /*
@@ -194,6 +196,8 @@ class Node
 
 
 class Solution {
+    
+    
     static Node insertAtTail(Node tail, Node curr) {
         tail.next = curr;
         return tail.next;
