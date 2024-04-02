@@ -53,6 +53,8 @@ class Main {
 // } Driver Code Ends
 
 
+
+
 //User function Template for Java
 
 class Solution
@@ -61,7 +63,7 @@ class Solution
     long power(int N,int R)
     {
         //Your code here
-        
+        int mod = 1000000007;
         
          if(R==0)
 
@@ -73,7 +75,7 @@ class Solution
 
        long temp=power(N,R/2);
 
-       temp=(temp*temp)%1000000007;
+       temp=(temp*temp)%mod;
 
        
 
@@ -81,7 +83,7 @@ class Solution
 
        {
 
-           return temp%1000000007;
+           return temp%mod;
 
        }
 
@@ -89,7 +91,7 @@ class Solution
 
        {
 
-           return (temp*N)%1000000007;
+           return (temp*N)%mod;
 
        }
 
