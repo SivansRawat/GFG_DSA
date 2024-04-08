@@ -51,6 +51,8 @@ class Solution {
     }
     
     
+    
+    
     void findAll(String current , int o , int c , List<String>result,int n){
         
         if(current.length() == 2*n){
@@ -61,4 +63,6 @@ class Solution {
         if(o<n) findAll(current+"(" , o+1,c,result,n);
         if(c<o) findAll(current+")" , o,c+1,result,n); 
     }
+    
+    
 }
