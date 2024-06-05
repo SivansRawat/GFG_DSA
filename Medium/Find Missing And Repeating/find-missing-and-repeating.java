@@ -30,30 +30,35 @@ class GFG {
 // User function Template for Java
 
 class Solve {
-    int[] findTwoElement(int arr[], int n) {
+    int[] findTwoElement(int a[], int n) {
         // code here
-        
-        
-    int[] hash = new int[n + 1];
-    for (int i = 0; i < n; i++) {
-        hash[arr[i]]++;
-    }
-    int repeating = -1, missing = -1;
-    for (int i = 1; i <= n; i++) {
-        if (hash[i] == 2) {
-            repeating = i;
+        // Sum of first n natural numbers
+        long SN = (long)n * (n + 1) / 2;
+        // Sum of squares of first n natural numbers
+        long S2N = (long)n * (n + 1) * (2 * n + 1) / 6;
+
+        long S = 0, S2 = 0;
+        for (int i = 0; i < n; i++) {
+            S += a[i];
+            S2 += (long)a[i] * a[i];
         }
-        if (hash[i] == 0) {
-            missing = i;
-        }
-        if (repeating != -1 && missing != -1) {
-            break;
-        }
-    }
-    
-    
-    return new int[]{repeating, missing};
-        
-        
+
+        // val1 = x - y
+        long val1 = S - SN;
+
+        // val2 = x^2 - y^2
+        long val2 = S2 - S2N;
+
+        // val2 = (x + y)(x - y)
+        val2 = val2 / val1;
+
+        // x = (val1 + val2) / 2
+        long x = (val1 + val2) / 2;
+
+        // y = x - val1
+        long y = x - val1;
+
+        int[] ans = {(int)x, (int)y};
+        return ans;
     }
 }
