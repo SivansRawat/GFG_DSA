@@ -29,53 +29,57 @@ class Sorting
 // } Driver Code Ends
 
 
-
-
 //User function Template for Java
-
 class Solution
 {
-    // arr[]: Input Array
-    // N : Size of the Array arr[]
-    //Function to count inversions in the array.
-public long MergeAndCount(long[] arr, long[] temp, int left, int mid, int right) {
-        int i = left;
-        int j = mid;
-        int k = left;
-        long inversionCount = 0;
-        while (i <= mid - 1 && j <= right) {
-            if (arr[i] <= arr[j]) {
-                temp[k++] = arr[i++];
+    static long inversionCount(long arr[], long N)
+    {
+        return mergeSort(arr, 0, N - 1);
+    }
+
+    private static long mergeSort(long[] arr, long low, long high) {
+        long cnt = 0;
+        if (low < high) {
+            long mid = (low + high) / 2;
+            cnt += mergeSort(arr, low, mid);
+            cnt += mergeSort(arr, mid + 1, high);
+            cnt += merge(arr, low, mid, high);
+        }
+        return cnt;
+    }
+
+    private static long merge(long[] arr, long low, long mid, long high) {
+        ArrayList<Long> temp = new ArrayList<>();
+        long left = low;
+        long right = mid + 1;
+
+        long cnt = 0;
+
+        while (left <= mid && right <= high) {
+            if (arr[(int)left] <= arr[(int)right]) {
+                temp.add(arr[(int)left]);
+                left++;
             } else {
-                temp[k++] = arr[j++];
-                inversionCount += (mid - i);
+                temp.add(arr[(int)right]);
+                cnt += (mid - left + 1);
+                right++;
             }
         }
-        while (i <= mid - 1) {
-            temp[k++] = arr[i++];
-        }
-        while (j <= right) {
-            temp[k++] = arr[j++];
-        }
-        for (i = left; i <= right; i++) {
-            arr[i] = temp[i];
-        }
-        return inversionCount;
-    }
 
-    public long MergeSortAndCount(long[] arr, long[] temp, int left, int right) {
-        long inversionCount = 0;
-        if (left < right) {
-            int mid = (left + right) / 2;
-            inversionCount += MergeSortAndCount(arr, temp, left, mid);
-            inversionCount += MergeSortAndCount(arr, temp, mid + 1, right);
-            inversionCount += MergeAndCount(arr, temp, left, mid + 1, right);
+        while (left <= mid) {
+            temp.add(arr[(int)left]);
+            left++;
         }
-        return inversionCount;
-    }
 
-    public long inversionCount(long[] arr, long N) {
-        long[] temp = new long[(int) N];
-        return MergeSortAndCount(arr, temp, 0, (int) (N - 1));
+        while (right <= high) {
+            temp.add(arr[(int)right]);
+            right++;
+        }
+
+        for (long i = low; i <= high; i++) {
+            arr[(int)i] = temp.get((int)(i - low));
+        }
+        
+        return cnt;
     }
 }
