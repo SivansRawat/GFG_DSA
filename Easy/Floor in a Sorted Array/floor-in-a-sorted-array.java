@@ -39,45 +39,26 @@ class Solution{
     // Function to find floor of x
     // arr: input array
     // n is the size of array
-    
     static int findFloor(long arr[], int n, long x)
     {
-        int start = 0;
-        int end = n-1;
         
-        int floor = -1;
+        // int n = arr.length; // size of the array
+          int low = 0, high = n - 1;
+        int ans = -1;
 
-        while(start <= end) {
-            int mid = (start+end)/2;
-
-            if(x == arr[mid]) {
-                // a[mid] is the floor               
-                return (int)mid;
-            } 
-            else if (x < arr[mid]) {
-                end = mid-1;
-            } 
-            
-            else {
-                // a[mid] is the largest element found so far that is smaller than x. So it is a candidate for the floor of x
-                floor = (int)mid; 
-                start = mid+1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // To avoid potential overflow
+            // maybe an answer
+            if (arr[mid] <= x) {
+                ans = mid;
+                // look for a larger value on the right
+                low = mid + 1;
+            } else {
+                high = mid - 1; // look on the left
             }
         }
-
-        return floor;
-        
-        
+        return ans;
         
     }
-
-        
-        
-        
-        
-     
-  
     
 }
-
-
