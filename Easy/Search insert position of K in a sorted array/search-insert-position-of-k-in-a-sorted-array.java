@@ -30,35 +30,25 @@ class GFG{
 
 class Solution
 {
-    static int searchInsertK(int Arr[], int N, int k)
+    static int searchInsertK(int arr[], int N, int x)
     {
-        int start = 0;
-        int end = N - 1;
- 
-    // Traverse the search space
-        while (start <= end)
-        {
-        int mid = (start + end) / 2;
- 
-        // If K is found
-        if (Arr[mid] == k){
-            return mid;
-            
+        // code here
+        
+        int n = arr.length; // size of the array
+        int low = 0, high = n - 1;
+        int ans = n;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            // maybe an answer
+            if (arr[mid] >= x) {
+                ans = mid;
+                //look for smaller index on the left
+                high = mid - 1;
+            } else {
+                low = mid + 1; // look on the right
+            }
         }
-           
- 
-        else if(Arr[mid] < k) {
-            
-            start = mid + 1;
-        }
-        else{
-            end = mid - 1;
-            
-        }
-            
-    }
- 
-    // Return insert position
-    return end + 1;
+        return ans;
     }
 }
