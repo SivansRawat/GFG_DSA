@@ -24,6 +24,8 @@ class GFG {
 // } Driver Code Ends
 
 
+
+
 class Solution {
     public static int Solve(int N, int[] piles, int H) {
         // code here
