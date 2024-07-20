@@ -50,10 +50,9 @@ class Solution{
      static ArrayList<Integer> leaders(int n, int arr[]) {
          ArrayList<Integer> result = new ArrayList<>();
         
-        // The rightmost element is always a leader
         int maxFromRight = arr[n-1];
         
-        // Traverse the array from right to left
+     
         for (int i = n - 1; i >= 0; i--) {
             if (arr[i] >= maxFromRight) {
                 result.add(arr[i]);
@@ -61,7 +60,7 @@ class Solution{
             }
         }
         
-        // Reverse the list to get the leaders in the original order
+        
         Collections.reverse(result);
         
         return result;
