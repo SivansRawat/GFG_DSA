@@ -45,6 +45,8 @@ class Array {
 
 
 
+
+
 class Solution{
     //Function to find the leaders in the array.
      static ArrayList<Integer> leaders(int n, int arr[]) {
